@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useRef, useState } from "react";
 
 function App() {
+  let inputRef = useRef();
+  let checkRef = useRef()
+  let pRef = useRef()
+  const [tasks, setTasks] = useState([]);
+  const [active, setActive] = useState([])
+  const [completed, setCompleted] = useState([])
+
+const addActive= ()=>{
+console.log('working');
+}
+
+  const addTodo = () => {
+    let inputValue = inputRef.current.value;
+    setTasks((prevTasks) => [...prevTasks, inputValue]);
+    
+    console.log(tasks);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <button >All</button>
+        <button onClick={addActive}>Active</button>
+        <button>Completed</button>
+      </div>
+      <input ref={inputRef} type="text" placeholder="Add details" />
+      <button onClick={addTodo}>Add</button>
+
+      {tasks.map((each, index) => {
+        return(
+          <div>
+            <input ref={checkRef} type="checkbox" />
+                    <p ref={pRef} key={index}>{each}</p>
+
+          </div>
+        )
+      })}
     </div>
   );
 }
