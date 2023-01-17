@@ -1,45 +1,39 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useRef, useState } from "react";
+import Header from "./components/Header";
+import Form from "./components/Form";
+import Todolist from "./components/Todolist";
 
 function App() {
-  let inputRef = useRef();
-  let checkRef = useRef()
-  let pRef = useRef()
+  const [input, setInput] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [active, setActive] = useState([])
-  const [completed, setCompleted] = useState([])
+  const [array, setArray] = useState([])
 
-const addActive= ()=>{
-console.log('working');
-}
-
-  const addTodo = () => {
-    let inputValue = inputRef.current.value;
-    setTasks((prevTasks) => [...prevTasks, inputValue]);
-    
-    console.log(tasks);
-  };
-
+  //   {
+  //     id: 1,
+  //     todoText: "zzzzzuuuuu",
+  //     completed: true,
+  //   },
+  //   {
+  //     id: 2,
+  //     todoText: "zzzzz",
+  //     completed: true,
+  //   },
+  // ]);
   return (
     <div className="App">
-      <div>
-        <button >All</button>
-        <button onClick={addActive}>Active</button>
-        <button>Completed</button>
-      </div>
-      <input ref={inputRef} type="text" placeholder="Add details" />
-      <button onClick={addTodo}>Add</button>
-
-      {tasks.map((each, index) => {
-        return(
-          <div>
-            <input ref={checkRef} type="checkbox" />
-                    <p ref={pRef} key={index}>{each}</p>
-
-          </div>
-        )
-      })}
+      <Header />
+      <Form
+        input={input}
+        setInput={setInput}
+        tasks={tasks}
+        setTasks={setTasks}
+      />
+      <Todolist tasks={tasks}
+        setTasks={setTasks} 
+        array={array}
+        setArray={setArray}/>
     </div>
   );
 }
